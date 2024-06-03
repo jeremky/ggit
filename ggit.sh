@@ -23,26 +23,28 @@ fi
 ## Commandes
 case $1 in
     c|commit)
-        for gd in $gitdir ; do
+        for gd in $(ls $gitdir) ; do
             echo "====> Dossier $gd :"
-            cd $gd ; git commit -a ; cd $HOME
+            cd $gitdir/$gd ; git commit -a
             echo ""
         done
+        cd $HOME
         ;;
     p|pull)
-        for gd in $gitdir ; do
+        for gd in $(ls $gitdir) ; do
             echo "====> Dossier $gd :"
-            cd $gd ; git pull ; cd $HOME
+            cd $gitdir/$gd ; git pull
             echo ""
         done
+        cd $HOME
         ;;
     *|push)
-        for gd in $gitdir ; do
+        for gd in $(ls $gitdir) ; do
             echo "====> Dossier $gd :"
-            cd $gd
+            cd $gitdir/$gd
             git add * ; git commit -m "Mise à jour" ; git push
-            cd $HOME
             echo ""
         done
+        cd $HOME
         ;;
 esac
