@@ -21,6 +21,7 @@ if [ "$server" != "$(hostname)" ] ; then
 fi
 
 ## Commandes
+echo ""
 case $1 in
     c|commit)
         for gd in $(ls $gitdir) ; do
