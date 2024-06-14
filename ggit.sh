@@ -15,10 +15,6 @@ else
     echo "Fichier $cfg introuvable"
     exit 0
 fi
-if [ "$server" != "$(hostname)" ] ; then
-    echo "ggit ne peut être lancé sur sur $server"
-    exit 0
-fi
 
 ## Commandes
 echo ""

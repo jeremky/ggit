@@ -1,9 +1,9 @@
 # ggit.sh
 
-Script simplifiant l'utilisation de Github
+Script simplifiant l'utilisation de Github. Un fichier de config est présent pour définir le dossier racine. Chaque sous dossier sera alors traité par le script.
 
-- Sans paramètre, lance un git push sur tous les dossiers
+- Sans paramètre, lance un commit suivi d'un git push
 
-- Avec le paramètre p/pull, lance un git pull sur tous les dossiers
+- Avec le paramètre p/pull, lance un git pull
 
-- Avec le paramètre c/commit, lance un git commit -a sous tous les dossiers
+- Avec le paramètre c/commit, lance un git commit -a
