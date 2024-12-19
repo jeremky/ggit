@@ -46,8 +46,6 @@ case $1 in
         cd $gitdir/$gd
         git add * ; git commit -m "Mise à jour" ; git push
         echo ""
-      else
-        echo "$gd non compatible"
       fi
     done
     cd $HOME
