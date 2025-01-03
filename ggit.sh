@@ -31,11 +31,11 @@ ggit_command() {
 echo ""
 case $1 in
   p|pull)
-    $command=$(git pull)
+    command=$(git pull)
     ggit_command $command
     ;;
   *|push)
-    $command=$(git add * ; git commit -m "Mise à jour" ; git push)
+    command=$(git add * ; git commit -m "Mise à jour" ; git push)
     ggit_command $command
     ;;
 esac
