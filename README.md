@@ -5,5 +5,3 @@ Script simplifiant l'utilisation de Github. Un fichier de config est présent po
 - Sans paramètre, lance un commit suivi d'un git push
 
 - Avec le paramètre p/pull, lance un git pull
-
-- Avec le paramètre c/commit, lance un git commit -a

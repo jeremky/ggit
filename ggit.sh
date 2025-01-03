@@ -19,16 +19,6 @@ fi
 ## Commandes
 echo ""
 case $1 in
-  c|commit)
-    for gd in $(ls $gitdir) ; do
-      if [ -d $gitdir/$gd/.git ] ; then
-        echo "====> Dossier $gd :"
-        cd $gitdir/$gd ; git commit -a
-        echo ""
-      fi
-    done
-    cd $HOME
-    ;;
   p|pull)
     for gd in $(ls $gitdir) ; do
       if [ -d $gitdir/$gd/.git ] ; then
