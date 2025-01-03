@@ -20,7 +20,7 @@ ggit_command() {
   for gd in $(ls $gitdir) ; do
     if [ -d $gitdir/$gd/.git ] ; then
       echo "====> Dossier $gd :"
-        cd $gitdir/$gd ; $command
+        echo "cd $gitdir/$gd ; $command"
         echo ""
     fi
   done
