@@ -27,10 +27,13 @@ for gd in $(ls $gitdir) ; do
         git pull
         ;;
       *|push)
-        git add * ; git commit -m "Mise à jour" ; git push
+        git add *
+        git commit -m "Mise à jour"
+        git push
         ;;
     esac
     echo ""
   fi
 done
 cd $HOME
+exit 0
