@@ -30,16 +30,12 @@ ggit_command() {
 ## Commandes
 echo ""
 case $1 in
-  c|commit)
-    $command=$(git commit -a)
-    ggit_command
-    ;;
   p|pull)
     $command=$(git pull)
-    ggit_command
+    ggit_command $command
     ;;
   *|push)
     $command=$(git add * ; git commit -m "Mise à jour" ; git push)
-    ggit_command
+    ggit_command $command
     ;;
 esac
