@@ -16,38 +16,26 @@ else
   exit 0
 fi
 
+ggit_command() {
+  for gd in $(ls $gitdir) ; do
+    if [ -d $gitdir/$gd/.git ] ; then
+      echo "====> Dossier $gd :"
+        echo "cd $gitdir/$gd ; $command"
+        echo ""
+    fi
+  done
+  cd $HOME
+}
+
 ## Commandes
 echo ""
 case $1 in
-  c|commit)
-    for gd in $(ls $gitdir) ; do
-      if [ -d $gitdir/$gd/.git ] ; then
-        echo "====> Dossier $gd :"
-        cd $gitdir/$gd ; git commit -a
-        echo ""
-      fi
-    done
-    cd $HOME
-    ;;
   p|pull)
-    for gd in $(ls $gitdir) ; do
-      if [ -d $gitdir/$gd/.git ] ; then
-        echo "====> Dossier $gd :"
-        cd $gitdir/$gd ; git pull
-        echo ""
-      fi
-    done
-    cd $HOME
+    command=$(git pull)
+    ggit_command
     ;;
   *|push)
-    for gd in $(ls $gitdir) ; do
-      if [ -d $gitdir/$gd/.git ] ; then
-        echo "====> Dossier $gd :"
-        cd $gitdir/$gd
-        git add * ; git commit -m "Mise à jour" ; git push
-        echo ""
-      fi
-    done
-    cd $HOME
+    command=$(git add * ; git commit -m "Mise à jour" ; git push)
+    ggit_command
     ;;
 esac
