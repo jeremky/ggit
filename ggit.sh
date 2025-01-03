@@ -1,12 +1,10 @@
 #!/bin/bash
 
-## Verification des droits
 if [ "$USER" = "root" ] ; then
   echo "Ne pas lancer en tant que root !"
   exit 0
 fi
 
-## Commandes
 cfg="$(dirname "$0")/ggit.cfg"
 if [ ! -f $cfg ] ; then
   echo "Fichier $cfg introuvable"
