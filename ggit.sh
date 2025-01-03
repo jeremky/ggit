@@ -18,26 +18,19 @@ fi
 
 ## Commandes
 echo ""
-case $1 in
-  p|pull)
-    for gd in $(ls $gitdir) ; do
-      if [ -d $gitdir/$gd/.git ] ; then
-        echo "====> Dossier $gd :"
-        cd $gitdir/$gd ; git pull
-        echo ""
-      fi
-    done
-    cd $HOME
-    ;;
-  *|push)
-    for gd in $(ls $gitdir) ; do
-      if [ -d $gitdir/$gd/.git ] ; then
-        echo "====> Dossier $gd :"
-        cd $gitdir/$gd
+for gd in $(ls $gitdir) ; do
+  if [ -d $gitdir/$gd/.git ] ; then
+    echo "====> Dossier $gd :"
+    cd $gitdir/$gd
+    case $1 in
+      p|pull)
+        git pull
+        ;;
+      *|push)
         git add * ; git commit -m "Mise à jour" ; git push
-        echo ""
-      fi
-    done
-    cd $HOME
-    ;;
-esac
+        ;;
+    esac
+    echo ""
+  fi
+done
+cd $HOME
