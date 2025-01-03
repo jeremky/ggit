@@ -1,8 +1,7 @@
 #!/bin/bash
 
 ## Variables
-dir=$(dirname "$0")
-cfg="$dir/$(basename -s .sh $0).cfg"
+cfg="$(dirname "$0")/ggit.cfg"
 
 ## Verification
 if [ "$USER" = "root" ] ; then
@@ -36,4 +35,3 @@ for gd in $(ls $gitdir) ; do
   fi
 done
 cd $HOME
-exit 0
