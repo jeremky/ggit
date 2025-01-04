@@ -12,7 +12,7 @@ if [ ! -f $cfg ] ; then
 else
   . $cfg
   echo ""
-  for gd in $(ls $gitdir) ; do
+  for gd in $(ls -1 $gitdir) ; do
     if [ -d $gitdir/$gd/.git ] ; then
       echo "====> Dossier $gd :"
       cd $gitdir/$gd
