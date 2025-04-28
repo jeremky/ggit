@@ -14,7 +14,9 @@ else
   echo ""
   for gd in $(ls -1 $gitdir) ; do
     if [[ -d $gitdir/$gd/.git ]]; then
-      echo "====> Dossier $gd :"
+      GREEN='\033[0;32m'
+      RESET='\033[0m'
+      echo -e "${GREEN}====> Dossier $gd :${RESET}"
       cd $gitdir/$gd
       git add *
       git commit -m "Mise à jour"
