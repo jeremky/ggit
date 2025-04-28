@@ -16,16 +16,9 @@ else
     if [[ -d $gitdir/$gd/.git ]]; then
       echo "====> Dossier $gd :"
       cd $gitdir/$gd
-      case $1 in
-        p|pull)
-          git pull
-          ;;
-        *|push)
-          git add *
-          git commit -m "Mise à jour"
-          git push
-          ;;
-      esac
+      git add *
+      git commit -m "Mise à jour"
+      git push
       echo ""
     fi
   done
