@@ -20,7 +20,7 @@ else
       cd $gitdir/$gd
       git add *
       git add .*
-      git commit -m "Mise à jour"
+      git commit -m "$message"
       git push
       echo ""
     fi
