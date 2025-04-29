@@ -19,6 +19,7 @@ else
       echo -e "${GREEN}====> $gd ${RESET}"
       cd $gitdir/$gd
       git add *
+      git add .*
       git commit -m "Mise à jour"
       git push
       echo ""
