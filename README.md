@@ -7,7 +7,7 @@ Script simplifiant l'utilisation de Github. Il permet d'effectuer rapidement une
 Un fichier de configuration est présent pour définir le dossier racine :
 
 ```bash
-# GGit config
+# ggit config
 gitdir="$HOME/scripts"
 message="Mise à jour"
 ```
