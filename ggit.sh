@@ -1,13 +1,18 @@
 #!/bin/bash
 
+# Coleurs
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+RESET='\033[0m'
+
 if [[ "$USER" = "root" ]]; then
-  echo "Ne pas lancer en tant que root !"
+  echo -e "${RED}Ne pas lancer en tant que root !${RESET}"
   exit 0
 fi
 
 cfg="$(dirname "$0")/ggit.cfg"
 if [[ ! -f $cfg ]]; then
-  echo "Fichier $cfg introuvable"
+  echo -e "${RED}Fichier $cfg introuvable${RESET}"
   exit 0
 else
   . $cfg
