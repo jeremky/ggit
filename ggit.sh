@@ -10,7 +10,8 @@ if [[ "$USER" = "root" ]]; then
   exit 0
 fi
 
-cfg="$(dirname "$0")/ggit.cfg"
+dir=$(dirname "$0")
+cfg="$dir/ggit.cfg"
 if [[ ! -f $cfg ]]; then
   echo -e "${RED}Fichier $cfg introuvable${RESET}"
   exit 0
