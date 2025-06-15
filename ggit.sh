@@ -12,6 +12,8 @@ if [[ "$USER" = "root" ]]; then
   exit 0
 fi
 
+gpush() { git add * ; git add .* ; git commit -m "$message" ; git push ;}
+
 # Exécution
 cfg="$(dirname "$0")/ggit.cfg"
 if [[ ! -f $cfg ]]; then
@@ -22,28 +24,33 @@ else
   case $1 in
     p|pull)
       echo ""
-      for gd in $(ls -1 $gitdir) ; do
-        if [[ -d $gitdir/$gd/.git ]]; then
-          echo -e "${GREEN}====> pull de $gd ${RESET}"
-          cd $gitdir/$gd
-          git pull
-          echo ""
-        fi
-      done
+      if [[ -d .git ]]; then
+        git pull
+      else
+        for gd in $(ls -1 $gitdir) ; do
+          if [[ -d $gitdir/$gd/.git ]]; then
+            echo -e "${GREEN}====> pull de $gd ${RESET}"
+            cd $gitdir/$gd
+            git pull
+            echo ""
+          fi
+        done
+      fi
       ;;
     *|push)
       echo ""
-      for gd in $(ls -1 $gitdir) ; do
-        if [[ -d $gitdir/$gd/.git ]]; then
-          echo -e "${YELLOW}====> push de $gd ${RESET}"
-          cd $gitdir/$gd
-          git add *
-          git add .*
-          git commit -m "$message"
-          git push
-          echo ""
-        fi
-      done
+      if [[ -d .git ]]; then
+        gpush
+      else
+        for gd in $(ls -1 $gitdir) ; do
+          if [[ -d $gitdir/$gd/.git ]]; then
+            echo -e "${YELLOW}====> push de $gd ${RESET}"
+            cd $gitdir/$gd
+            gpush
+            echo ""
+          fi
+        done
+      fi
   esac
   cd $HOME
 fi
