@@ -56,5 +56,6 @@ else
         done
       fi
   esac
+  echo ""
   cd $HOME
 fi
