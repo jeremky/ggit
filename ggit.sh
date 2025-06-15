@@ -14,13 +14,13 @@ fi
 
 gpush() { 
   echo ""
-  echo -e "${YELLOW}====> push de $(realpath . | cut -d/ -f3,3)${RESET}"
+  echo -e "${YELLOW}====> push de $(basename "$(realpath .)")${RESET}"
   git add * ; git add .* ; git commit -m "$message" ; git push
 }
 
 gpull() {
   echo ""
-  echo -e "${GREEN}====> pull de $(realpath . | cut -d/ -f3,3)${RESET}"
+  echo -e "${GREEN}====> pull de $(basename "$(realpath .)")${RESET}"
   git pull
 }
 
