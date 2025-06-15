@@ -17,19 +17,32 @@ if [[ ! -f $cfg ]]; then
   exit 0
 else
   . $cfg
-  echo ""
-  for gd in $(ls -1 $gitdir) ; do
-    if [[ -d $gitdir/$gd/.git ]]; then
-      GREEN='\033[0;32m'
-      RESET='\033[0m'
-      echo -e "${GREEN}====> $gd ${RESET}"
-      cd $gitdir/$gd
-      git add *
-      git add .*
-      git commit -m "$message"
-      git push
+  case $1 in
+    p|pull)
+      shift
       echo ""
-    fi
-  done
+      for gd in $* ; do
+        if [[ -d $gitdir/$gd/.git ]]; then
+          echo -e "${GREEN}====> pull de $gd ${RESET}"
+          cd $gitdir/$gd
+          git pull
+          echo ""
+        fi
+      done
+      ;;
+    *|push)
+      echo ""
+      for gd in $(ls -1 $gitdir) ; do
+        if [[ -d $gitdir/$gd/.git ]]; then
+          echo -e "${GREEN}====> push de $gd ${RESET}"
+          cd $gitdir/$gd
+          git add *
+          git add .*
+          git commit -m "$message"
+          git push
+          echo ""
+        fi
+      done
+  esac
   cd $HOME
 fi
