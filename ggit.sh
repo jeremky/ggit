@@ -12,7 +12,11 @@ if [[ "$USER" = "root" ]]; then
   exit 0
 fi
 
-gpush() { git add * ; git add .* ; git commit -m "$message" ; git push ;}
+gpush() { 
+  echo ""
+  echo -e "${YELLOW}====> push de $(realpath . | cut -d/ -f3,3)"
+  git add * ; git add .* ; git commit -m "$message" ; git push
+}
 
 # Exécution
 cfg="$(dirname "$0")/ggit.cfg"
