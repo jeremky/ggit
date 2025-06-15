@@ -21,9 +21,8 @@ else
   . $cfg
   case $1 in
     p|pull)
-      shift
       echo ""
-      for gd in $* ; do
+      for gd in $(ls -1 $gitdir) ; do
         if [[ -d $gitdir/$gd/.git ]]; then
           echo -e "${GREEN}====> pull de $gd ${RESET}"
           cd $gitdir/$gd
