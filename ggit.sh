@@ -14,7 +14,7 @@ fi
 
 gpush() { 
   echo ""
-  echo -e "${YELLOW}====> push de $(realpath . | cut -d/ -f3,3)"
+  echo -e "${YELLOW}====> push de $(realpath . | cut -d/ -f3,3)${RESET}"
   git add * ; git add .* ; git commit -m "$message" ; git push
 }
 
