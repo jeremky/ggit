@@ -18,6 +18,12 @@ gpush() {
   git add * ; git add .* ; git commit -m "$message" ; git push
 }
 
+gpull() {
+  echo ""
+  echo -e "${GREEN}====> pull de $(realpath . | cut -d/ -f3,3)${RESET}"
+  git pull
+}
+
 # Exécution
 cfg="$(dirname "$0")/ggit.cfg"
 if [[ ! -f $cfg ]]; then
@@ -27,31 +33,25 @@ else
   . $cfg
   case $1 in
     p|pull)
-      echo ""
       if [[ -d .git ]]; then
-        git pull
+        gpull
       else
         for gd in $(ls -1 $gitdir) ; do
           if [[ -d $gitdir/$gd/.git ]]; then
-            echo -e "${GREEN}====> pull de $gd ${RESET}"
             cd $gitdir/$gd
-            git pull
-            echo ""
+            gpull
           fi
         done
       fi
       ;;
     *|push)
-      echo ""
       if [[ -d .git ]]; then
         gpush
       else
         for gd in $(ls -1 $gitdir) ; do
           if [[ -d $gitdir/$gd/.git ]]; then
-            echo -e "${YELLOW}====> push de $gd ${RESET}"
             cd $gitdir/$gd
             gpush
-            echo ""
           fi
         done
       fi
