@@ -1,33 +1,38 @@
 #!/bin/bash
 
-# Couleurs
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-YELLOW='\033[0;33m'
-RESET='\033[0m'
+cecho() {
+  local RESET='\033[0m'
+  case $1 in
+    m|message) color='\033[0;32m' ;;
+    w|warning) color='\033[0;33m' ;;
+    e|error)   color='\033[0;31m' ;;
+  esac
+  shift
+  echo -e "${color}$*${RESET}"
+}
 
 # Droits
 if [[ "$USER" = "root" ]]; then
-  echo -e "${RED}Ne pas lancer en tant que root !${RESET}"
+  cecho e "Ne pas lancer en tant que root !"
   exit 0
 fi
 
 gpush() { 
   echo ""
-  echo -e "${YELLOW}====> push de $(basename "$(realpath .)")${RESET}"
+  cecho w "====> push de $(basename "$(realpath .)")"
   git add * ; git add .* ; git commit -m "$message" ; git push
 }
 
 gpull() {
   echo ""
-  echo -e "${GREEN}====> pull de $(basename "$(realpath .)")${RESET}"
+  cecho m "====> pull de $(basename "$(realpath .)")"
   git pull
 }
 
 # Exécution
 cfg="$(dirname "$0")/ggit.cfg"
 if [[ ! -f $cfg ]]; then
-  echo -e "${RED}Fichier $cfg introuvable${RESET}"
+  cecho e "Fichier $cfg introuvable"
   exit 0
 else
   . $cfg
