@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Coleurs
+# Couleurs
 GREEN='\033[0;32m'
 RED='\033[0;31m'
+YELLOW='\033[0;33m'
 RESET='\033[0m'
 
 if [[ "$USER" = "root" ]]; then
@@ -34,7 +35,7 @@ else
       echo ""
       for gd in $(ls -1 $gitdir) ; do
         if [[ -d $gitdir/$gd/.git ]]; then
-          echo -e "${GREEN}====> push de $gd ${RESET}"
+          echo -e "${YELLOW}====> push de $gd ${RESET}"
           cd $gitdir/$gd
           git add *
           git add .*
