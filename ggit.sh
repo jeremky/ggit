@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Messages colorisés
-error()    { echo -e "\033[0;31m$*\033[0m" ;}
-message()  { echo -e "\033[0;32m$*\033[0m" ;}
-warning()  { echo -e "\033[0;33m$*\033[0m" ;}
+error()    { echo -e "\033[0;31m====> $*\033[0m" ;}
+message()  { echo -e "\033[0;32m====> $*\033[0m" ; echo "" ;}
+warning()  { echo "" ; echo -e "\033[0;33m====> $*\033[0m" ;}
 
 # Droits
 if [[ "$USER" = "root" ]]; then
@@ -12,14 +12,14 @@ if [[ "$USER" = "root" ]]; then
 fi
 
 gpush() { 
-  echo ""
-  warning "====> push de $(basename "$(realpath .)")"
+  #echo ""
+  warning "push de $(basename "$(realpath .)")"
   git add * ; git add .* ; git commit -m "$message" ; git push
 }
 
 gpull() {
-  echo ""
-  message "====> pull de $(basename "$(realpath .)")"
+  #echo ""
+  warning "pull de $(basename "$(realpath .)")"
   git pull
 }
 
@@ -56,5 +56,6 @@ else
       fi
   esac
   echo ""
+  message "Synchronisation git terminée"
   cd $HOME
 fi
