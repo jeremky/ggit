@@ -12,13 +12,11 @@ if [[ "$USER" = "root" ]]; then
 fi
 
 gpush() { 
-  #echo ""
   warning "push de $(basename "$(realpath .)")"
   git add * ; git add .* ; git commit -m "$message" ; git push
 }
 
 gpull() {
-  #echo ""
   warning "pull de $(basename "$(realpath .)")"
   git pull
 }
