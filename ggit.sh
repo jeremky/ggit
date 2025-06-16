@@ -19,7 +19,7 @@ gpush() {
 
 gpull() {
   echo ""
-  warning "pull de $(basename "$(realpath .)")"
+  message "pull de $(basename "$(realpath .)")"
   git pull
 }
 
