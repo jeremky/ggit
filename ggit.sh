@@ -14,7 +14,9 @@ fi
 gpush() { 
   echo
   warning "push de $(basename "$(realpath .)")"
-  git add * ; git add .* ; git commit -m "$message" ; git push
+  git add $(git ls-files --others --exclude-standard; git ls-files --modified)
+  #git add * ; git add .* 
+  git commit -m "$message" ; git push
 }
 
 gpull() {
