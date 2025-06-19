@@ -26,7 +26,7 @@ gpull() {
 }
 
 # Exécution
-cfg="$(dirname "$0")/ggit.cfg"
+cfg="$(dirname "$(realpath "$0")")/ggit.cfg"
 if [[ ! -f $cfg ]]; then
   error "Fichier $cfg introuvable"
   exit 1
