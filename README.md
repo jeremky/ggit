@@ -23,4 +23,4 @@ git push
 
 Avec le paramètre `pull`, un `git pull` sera effectué sans l'ensemble des dossiers.
 
-> Si le prompt est dans un dossier content un sous dossier `.git`, seul ce sous dossier sera concerné
+> Si le prompt est dans un dossier contenant un sous dossier `.git`, seul ce sous dossier sera concerné par la mise à jour
