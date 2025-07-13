@@ -33,7 +33,7 @@ else
   . $cfg
   case $1 in
     c|clone)
-      git clone git@github.com:$2
+      git clone git@github.com:$user/$2
       ;;
     p|pull)
       if [[ -d .git ]]; then
