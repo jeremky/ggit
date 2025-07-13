@@ -32,6 +32,9 @@ if [[ ! -f $cfg ]]; then
 else
   . $cfg
   case $1 in
+    c|clone)
+      git clone git@github.com:$2
+      ;;
     p|pull)
       if [[ -d .git ]]; then
         gpull
