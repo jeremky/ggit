@@ -17,4 +17,4 @@ git push
 
 > Si le prompt est dans un dossier contenant un sous dossier `.git`, seul ce sous dossier sera concerné par la mise à jour
 
-- Avec le paramètre `clone`, un clone via ssh sera effectué du repo en paramètre. N'indiquez que le chemin sans github.com
+- Avec le paramètre `clone`, un clone via ssh sera effectué du repo en paramètre. N'indiquez que le chemin final de votre repo. Le nom de votre user github doit correspondre à votre user système
