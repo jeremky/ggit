@@ -55,4 +55,3 @@ case $1 in
     fi
 esac
 echo
-cd $HOME
