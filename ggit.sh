@@ -15,7 +15,7 @@ gpush() {
   echo
   warning "push de $(basename "$(realpath .)")"
   git add $(git ls-files --exclude-standard; git ls-files --modified; git ls-files --others --exclude-standard)
-  git commit -m "$message" ; git push
+  git commit -m "Mise à jour" ; git push
 }
 
 gpull() {
@@ -25,40 +25,34 @@ gpull() {
 }
 
 # Exécution
-cfg="$(dirname "$(realpath "$0")")/ggit.cfg"
-if [[ ! -f $cfg ]]; then
-  error "Fichier $cfg introuvable"
-  exit 1
-else
-  . $cfg
-  case $1 in
-    c|clone)
-      git clone git@github.com:$user/$2
-      ;;
-    p|pull)
-      if [[ -d .git ]]; then
-        gpull
-      else
-        for gd in $(ls -1 $gitdir) ; do
-          if [[ -d $gitdir/$gd/.git ]]; then
-            cd $gitdir/$gd
-            gpull
-          fi
-        done
-      fi
-      ;;
-    *|push)
-      if [[ -d .git ]]; then
-        gpush
-      else
-        for gd in $(ls -1 $gitdir) ; do
-          if [[ -d $gitdir/$gd/.git ]]; then
-            cd $gitdir/$gd
-            gpush
-          fi
-        done
-      fi
-  esac
-  echo
-  cd $HOME
-fi
+gitdir="$(dirname "$0")/.."
+case $1 in
+  c|clone)
+    git clone git@github.com:$(id -un)/$2
+    ;;
+  p|pull)
+    if [[ -d .git ]]; then
+      gpull
+    else
+      for gd in $(ls -1 $gitdir) ; do
+        if [[ -d $gitdir/$gd/.git ]]; then
+          cd $gitdir/$gd
+          gpull
+        fi
+      done
+    fi
+    ;;
+  *|push)
+    if [[ -d .git ]]; then
+      gpush
+    else
+      for gd in $(ls -1 $gitdir) ; do
+        if [[ -d $gitdir/$gd/.git ]]; then
+          cd $gitdir/$gd
+          gpush
+        fi
+      done
+    fi
+esac
+echo
+cd $HOME
