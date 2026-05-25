@@ -14,7 +14,7 @@ Le fichier `ggit.cfg` permet de définir les éléments suivants :
 # ggit config
 user=$USER
 gitdir=$(dirname "$0")/..
-webgit=codeberg.org
+webgit=github.com
 ```
 
 ## Utilisation
