@@ -30,7 +30,7 @@ gclone() {
   echo
   message "Clone de $app sur $webgit..."
   git clone git@"$webgit":$user/$app || return 1
-  git remote add mirror git@$webmirror/$user/$app || return 1
+  git remote add mirror ssh://git@$webmirror/$user/$app || return 1
 }
 
 gclean() {
