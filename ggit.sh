@@ -30,10 +30,12 @@ gclone() {
   echo
   message "Clone de $app sur $webgit..."
   git clone git@$webgit:$user/$app || return 1
-  (
-    cd $app && git remote set-url --push origin git@$webgit:$user/$app 
-    git remote set-url --add --push origin git@$webclone:$user/$app
-  )
+  if [[ ! -z $webclone ]]; then
+    (
+      cd $app && git remote set-url --push origin git@$webgit:$user/$app
+      git remote set-url --add --push origin git@$webclone:$user/$app
+    )
+  fi
 }
 
 gclean() {
