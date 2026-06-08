@@ -29,8 +29,11 @@ gpull() {
 gclone() {
   echo
   message "Clone de $app sur $webgit..."
-  git clone git@"$webgit":$user/$app || return 1
-  git remote add mirror ssh://git@$webmirror/$user/$app || return 1
+  git clone git@$webgit:$user/$app || return 1
+  (
+    cd $app && git remote set-url --push origin git@$webgit:$user/$app 
+    git remote set-url --add --push origin git@$webclone:$user/$app
+  )
 }
 
 gclean() {
