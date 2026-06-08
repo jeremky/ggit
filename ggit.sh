@@ -33,8 +33,8 @@ gclone() {
   if [[ -n $webclone ]]; then
     (
       cd $app || return
-      git remote set-url --push origin git@$webgit:$user/$app
-      git remote set-url --add --push origin git@$webclone:$user/$app
+      git remote set-url --add --push origin ssh://git@$webgit/$user/$app.git
+      git remote set-url --add --push origin ssh://git@$webclone/$user/$app.git
     )
   fi
 }
