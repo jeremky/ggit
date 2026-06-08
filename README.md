@@ -9,12 +9,14 @@ Le fichier `ggit.cfg` permet de définir les éléments suivants :
 - L'utilisateur du dépôt
 - Le chemin du dossier parent
 - Le service où se trouve les dépôts
+- Un dépôt secondaire pour les push (**facultatif**)
 
 ```txt
 # ggit config
 user=$USER
 gitdir=$(dirname "$0")/..
 webgit=github.com
+weblone=codeberg.org
 ```
 
 ## Utilisation
