@@ -12,6 +12,12 @@ if [[ ! -f "$cfg" ]]; then
   exit 1
 fi
 
+# Vérification des dépendances
+if ! command -v git &>/dev/null; then
+  error "Git n'est pas installé"
+  exit 1
+fi
+
 # Fonctions
 gpush() {
   echo
