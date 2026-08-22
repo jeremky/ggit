@@ -16,14 +16,14 @@ Le fichier `ggit.cfg` permet de définir les éléments suivants :
 user=$USER
 gitdir=$(dirname "$0")/..
 webgit=github.com
-weblone=codeberg.org
+webclone=codeberg.org
 ```
 
 ## Utilisation
 
 > Si le prompt est dans un dossier contenant un sous dossier `.git`, seul ce sous dossier sera concerné par la mise à jour
 
-- Utilisé **sans paramètre**, les commandes suivantes seront exécutées sur chaque dossier contenant un sous dossier `.git` :
+- Utilisé **sans paramètre** (ou avec `push`), les commandes suivantes seront exécutées sur chaque dossier contenant un sous dossier `.git` (rien n'est commit si le dépôt est déjà propre) :
 
 ```bash
 git add -A
@@ -32,5 +32,9 @@ git push
 ```
 
 - Avec le paramètre `pull`, un `git pull` sera effectué sur l'ensemble des dossiers
+- Avec le paramètre `status`, un `git status --short --branch` sera affiché pour l'ensemble des dossiers
 - Avec le paramètre `garbage`, un nettoyage (`git gc`) sera effectué sur l'ensemble des dossiers
 - Avec le paramètre `clone`, clone via SSH le dépôt passé en paramètre (`./ggit.sh clone mon-repo`)
+- Avec le paramètre `help`, affiche l'aide des commandes disponibles
+
+L'option `-n` ou `--dry-run` (combinable avec n'importe quelle commande) affiche les actions prévues sans rien exécuter.
