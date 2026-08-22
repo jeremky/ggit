@@ -36,5 +36,3 @@ git push
 - Avec le paramètre `garbage`, un nettoyage (`git gc`) sera effectué sur l'ensemble des dossiers
 - Avec le paramètre `clone`, clone via SSH le dépôt passé en paramètre (`./ggit.sh clone mon-repo`)
 - Avec le paramètre `help`, affiche l'aide des commandes disponibles
-
-L'option `-n` ou `--dry-run` (combinable avec n'importe quelle commande) affiche les actions prévues sans rien exécuter.
