@@ -26,39 +26,28 @@ Usage: $(basename "$0") [commande] [options]
 Commandes :
   (aucune) | push          Ajoute, commit et pousse les modifications
   p | pull                 Pull sur chaque dépôt
-  s | status                Affiche le statut de chaque dépôt
-  g | garbage                Nettoie (git gc) chaque dépôt
-  c | clone <repo...>        Clone un ou plusieurs dépôts
-  h | help                    Affiche cette aide
-
-Options :
-  -n | --dry-run            N'exécute rien, affiche les actions prévues
+  s | status               Affiche le statut de chaque dépôt
+  g | garbage              Nettoie (git gc) chaque dépôt
+  c | clone <repo...>      Clone un ou plusieurs dépôts
+  h | help                 Affiche cette aide
 EOF
-}
-
-rungit() {
-  if $DRYRUN; then
-    echo "[dry-run] git $*"
-  else
-    git "$@"
-  fi
 }
 
 gpush() {
   echo
   warning "push de $(basename "$(realpath .)")"
   if [[ -z $(git status --porcelain) ]]; then
-    message "Rien à commit"
+    echo "Rien à commit"
     return
   fi
-  rungit add -A
-  rungit commit -m "Update" && rungit push
+  git add -A
+  git commit -m "Update" && git push
 }
 
 gpull() {
   echo
   message "pull de $(basename "$(realpath .)")"
-  rungit pull
+  git pull
 }
 
 gstatus() {
@@ -70,10 +59,6 @@ gstatus() {
 gclone() {
   echo
   message "Clone de $app sur $webgit..."
-  if $DRYRUN; then
-    echo "[dry-run] git clone git@$webgit:$user/$app"
-    return
-  fi
   git clone "git@$webgit:$user/$app" || return 1
   if [[ -n $webclone ]]; then
     (
@@ -87,7 +72,7 @@ gclone() {
 gclean() {
   echo
   message "clean de $(basename "$(realpath .)")"
-  rungit gc --aggressive --prune=now
+  git gc --aggressive --prune=now
 }
 
 gitrun() {
@@ -108,16 +93,6 @@ gitrun() {
 # Exécution
 # shellcheck source=./ggit.cfg
 . "$cfg"
-
-DRYRUN=false
-args=()
-for arg in "$@"; do
-  case "$arg" in
-    -n | --dry-run) DRYRUN=true ;;
-    *) args+=("$arg") ;;
-  esac
-done
-set -- "${args[@]}"
 
 case "$1" in
   c | clone)
