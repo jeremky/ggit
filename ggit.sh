@@ -60,7 +60,7 @@ gclone() {
   echo
   message "Clone de $app sur $webgit..."
   git clone "git@$webgit:$user/$app" || return 1
-  if [[ -n $webclone ]]; then
+  if [[ -n "$webclone" ]]; then
     (
       cd "$app" || return
       git remote set-url --add --push origin "git@$webgit:$user/$app.git"
@@ -80,7 +80,7 @@ gitrun() {
   if [[ -d .git ]]; then
     "$fn"
   else
-    if [[ -z $gitdir ]]; then
+    if [[ -z "$gitdir" ]]; then
       error "Variable gitdir non définie dans $cfg"
       exit 1
     fi
