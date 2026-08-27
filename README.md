@@ -34,5 +34,5 @@ git push
 - Avec le paramètre `pull`, un `git pull` sera effectué sur l'ensemble des dossiers
 - Avec le paramètre `status`, un `git status --short --branch` sera affiché pour l'ensemble des dossiers
 - Avec le paramètre `garbage`, un nettoyage (`git gc`) sera effectué sur l'ensemble des dossiers
-- Avec le paramètre `clone`, clone via SSH le dépôt passé en paramètre (`./ggit.sh clone mon-repo`)
+- Avec le paramètre `clone`, clone via SSH un ou plusieurs dépôts passés en paramètre (`./ggit.sh clone mon-repo autre-repo`). L'option `-m`/`--mirror` ajoute en plus `webclone` comme remote de push secondaire, pour pousser simultanément vers un dépôt miroir (`./ggit.sh clone --mirror mon-repo`)
 - Avec le paramètre `help`, affiche l'aide des commandes disponibles
