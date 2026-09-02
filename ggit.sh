@@ -43,7 +43,7 @@ gpush() {
     return
   fi
   git add -A
-  git commit -m "Update" && git push
+  git commit -m "Mise à jour" && git push
 }
 
 gpull() {
