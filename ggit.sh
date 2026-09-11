@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Messages en couleur
-error() { echo -e "\033[0;36m──────────\033[0m\n\033[0;31m❱ $*\033[0m"; }
-message() { echo -e "\033[0;36m──────────\033[0m\n\033[0;32m❱ $*\033[0m"; }
-warning() { echo -e "\033[0;33m❱ $*\033[0m\n\033[0;36m──────────\033[0m"; }
+error() { echo -e "\033[0;36m──────────\033[0m\n\033[0;31m❯ $*\033[0m"; }
+message() { echo -e "\033[0;36m──────────\033[0m\n\033[0;32m❯ $*\033[0m"; }
+warning() { echo -e "\033[0;33m❯ $*\033[0m\n\033[0;36m──────────\033[0m"; }
 
 # Config
 cfg="$(dirname "$(realpath "$0")")/ggit.cfg"
@@ -62,7 +62,7 @@ gclone() {
   local app=$1
   local mirror=$2
   echo
-  warning "Clone de $app sur $webgit..."
+  warning "Clone de $app sur $webgit"
   git clone "git@$webgit:$user/$app" || return 1
   if [[ "$mirror" == 1 ]]; then
     if [[ -z "$webclone" ]]; then
