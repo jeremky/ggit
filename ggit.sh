@@ -28,9 +28,9 @@ Commandes :
   p | pull                 Pull sur chaque dépôt
   s | status               Affiche le statut de chaque dépôt
   g | garbage              Nettoie (git gc) chaque dépôt
-  c | clone [-m|--mirror] <repo...>
+  c | clone <repo...>
                             Clone un ou plusieurs dépôts
-                            -m, --mirror : ajoute aussi $webclone comme remote de push
+                            Si $webclone est définie dans $cfg, l'ajoute aussi comme remote de push
   h | help                 Affiche cette aide
 EOF
 }
@@ -60,15 +60,10 @@ gstatus() {
 
 gclone() {
   local app=$1
-  local mirror=$2
   echo
   warning "Clone de $app sur $webgit"
   git clone "git@$webgit:$user/$app" || return 1
-  if [[ "$mirror" == 1 ]]; then
-    if [[ -z "$webclone" ]]; then
-      error "Variable webclone non définie dans $cfg"
-      return 1
-    fi
+  if [[ -n "$webclone" ]]; then
     (
       cd "$app" || return
       git remote set-url --add --push origin "git@$webgit:$user/$app.git"
@@ -108,13 +103,8 @@ gitrun() {
 case "$1" in
   c | clone)
     shift
-    mirror=0
-    if [[ "$1" == "-m" || "$1" == "--mirror" ]]; then
-      mirror=1
-      shift
-    fi
     for app in "$@"; do
-      gclone "$app" "$mirror"
+      gclone "$app"
     done
     ;;
   g | garbage)
