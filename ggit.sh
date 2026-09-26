@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Messages en couleur
+# Colored messages
 error() { echo -e "\033[0;36m──────────\033[0m\n\033[0;31m❯ $*\033[0m"; }
 message() { echo -e "\033[0;36m──────────\033[0m\n\033[0;32m❯ $*\033[0m"; }
 warning() { echo -e "\033[0;33m❯ $*\033[0m\n\033[0;36m──────────\033[0m"; }
@@ -8,60 +8,60 @@ warning() { echo -e "\033[0;33m❯ $*\033[0m\n\033[0;36m────────
 # Config
 cfg="$(dirname "$(realpath "$0")")/ggit.cfg"
 if [[ ! -f "$cfg" ]]; then
-  error "Fichier $cfg introuvable"
+  error "File $cfg not found"
   exit 1
 fi
 
-# Vérification des dépendances
+# Check dependencies
 if ! command -v git &>/dev/null; then
-  error "Git n'est pas installé"
+  error "Git is not installed"
   exit 1
 fi
 
-# Fonctions
+# Functions
 usage() {
   cat <<EOF
-Usage: $(basename "$0") [commande] [options]
+Usage: $(basename "$0") [command] [options]
 
-Commandes :
-  (aucune) | push          Ajoute, commit et pousse les modifications
-  p | pull                 Pull sur chaque dépôt
-  s | status               Affiche le statut de chaque dépôt
-  g | garbage              Nettoie (git gc) chaque dépôt
+Commands:
+  (none) | push            Add, commit and push changes
+  p | pull                 Pull each repository
+  s | status               Show the status of each repository
+  g | garbage              Clean up (git gc) each repository
   c | clone <repo...>
-                            Clone un ou plusieurs dépôts
-                            Si $webclone est définie dans $cfg, l'ajoute aussi comme remote de push
-  h | help                 Affiche cette aide
+                            Clone one or more repositories
+                            If $webclone is set in $cfg, also add it as a push remote
+  h | help                 Show this help
 EOF
 }
 
 gpush() {
   echo
-  warning "push de $(basename "$(realpath .)")"
+  warning "Pushing $(basename "$(realpath .)")"
   if [[ -z $(git status --porcelain) ]]; then
-    echo "Rien à commit"
+    echo "Nothing to commit"
     return
   fi
   git add -A
-  git commit -m "Mise à jour" && git push
+  git commit -m "Update" && git push
 }
 
 gpull() {
   echo
-  warning "pull de $(basename "$(realpath .)")"
-  git pull || error "Erreur de pull"
+  warning "Pulling $(basename "$(realpath .)")"
+  git pull || error "Pull failed"
 }
 
 gstatus() {
   echo
-  warning "status de $(basename "$(realpath .)")"
-  git status --short --branch || error "Base git corrompue"
+  warning "Status of $(basename "$(realpath .)")"
+  git status --short --branch || error "Corrupted git repository"
 }
 
 gclone() {
   local app=$1
   echo
-  warning "Clone de $app sur $webgit"
+  warning "Cloning $app from $webgit"
   git clone "git@$webgit:$user/$app" || return 1
   if [[ -n "$webclone" ]]; then
     (
@@ -69,16 +69,16 @@ gclone() {
       git remote set-url --add --push origin "git@$webgit:$user/$app.git"
       git remote set-url --add --push origin "git@$webclone:$user/$app.git"
     )
-    message "Mirroir push vers $webclone ajouté"
+    message "Push mirror to $webclone added"
   fi
 }
 
 gclean() {
   repo="$(basename "$(realpath .)")"
   echo
-  warning "clean de $repo"
+  warning "Cleaning $repo"
   git gc --aggressive --prune=now
-  message "clean de $repo effectué"
+  message "$repo cleaned"
 }
 
 gitrun() {
@@ -87,7 +87,7 @@ gitrun() {
     "$fn"
   else
     if [[ -z "$gitdir" ]]; then
-      error "Variable gitdir non définie dans $cfg"
+      error "gitdir variable not set in $cfg"
       exit 1
     fi
     for gd in "$gitdir"/*; do
@@ -96,7 +96,7 @@ gitrun() {
   fi
 }
 
-# Exécution
+# Execution
 # shellcheck source=./ggit.cfg
 . "$cfg"
 
@@ -123,7 +123,7 @@ case "$1" in
     usage
     ;;
   *)
-    error "Commande inconnue : $1"
+    error "Unknown command: $1"
     usage
     exit 1
     ;;
