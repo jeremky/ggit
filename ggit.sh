@@ -28,9 +28,8 @@ Commands:
   p | pull                 Pull each repository
   s | status               Show the status of each repository
   g | garbage              Clean up (git gc) each repository
-  c | clone <repo...>
-                            Clone one or more repositories
-                            If $webclone is set in $cfg, also add it as a push remote
+  c | clone <repo...>      Clone one or more repositories
+                           If $webclone is set in $cfg, also add it as a push remote
   h | help                 Show this help
 EOF
 }
