@@ -82,7 +82,7 @@ gclean() {
 
 gitrun() {
   local fn=$1
-  if [[ -d .git ]]; then
+  if [[ -e .git ]]; then
     "$fn"
   else
     if [[ -z "$gitdir" ]]; then
