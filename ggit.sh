@@ -90,7 +90,7 @@ gitrun() {
       exit 1
     fi
     for gd in "$gitdir"/*; do
-      [[ -d "$gd/.git" ]] && (cd "$gd" && "$fn")
+      [[ -e "$gd/.git" ]] && (cd "$gd" && "$fn")
     done
   fi
 }
