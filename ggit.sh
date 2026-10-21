@@ -29,7 +29,6 @@ Commands:
   s | status               Show the status of each repository
   g | garbage              Clean up (git gc) each repository
   c | clone <repo...>      Clone one or more repositories
-                           If $webclone is set in $cfg, also add it as a push remote
   h | help                 Show this help
 EOF
 }
@@ -62,14 +61,7 @@ gclone() {
   echo
   warning "Cloning $app from $webgit"
   git clone "git@$webgit:$user/$app" || return 1
-  if [[ -n "$webclone" ]]; then
-    (
-      cd "$app" || return
-      git remote set-url --add --push origin "git@$webgit:$user/$app.git"
-      git remote set-url --add --push origin "git@$webclone:$user/$app.git"
-    )
-    message "Push mirror to $webclone added"
-  fi
+  message "$app pulled"
 }
 
 gclean() {
