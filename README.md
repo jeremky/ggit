@@ -16,7 +16,6 @@ The `ggit.cfg` file lets you define the following:
 user=$USER
 gitdir=$(dirname "$0")/..
 webgit=github.com
-webclone=codeberg.org
 ```
 
 ## Usage
@@ -34,5 +33,5 @@ git push
 - `pull`: run `git pull` on all directories
 - `status`: run `git status --short --branch` for all directories
 - `garbage`: run a cleanup (`git gc`) on all directories
-- `clone`: clones one or more repositories passed as arguments over SSH (`./ggit.sh clone my-repo other-repo`). If `webclone` is set in `ggit.cfg`, it is automatically added as a secondary push remote, so changes are pushed to a mirror repository at the same time
+- `clone`: clones one or more repositories passed as arguments over SSH (`./ggit.sh clone my-repo other-repo`)
 - `help`: shows help for the available commands
