@@ -9,12 +9,11 @@ The `ggit.cfg` file lets you define the following:
 - The repository user
 - The path to the parent directory
 - The service hosting the repositories
-- A secondary repository for pushes (**optional**)
 
 ```txt
 # ggit config
 user=$USER
-gitdir=$(dirname "$0")/..
+gitdir="$(dirname "$0")/.."
 webgit=github.com
 ```
 
